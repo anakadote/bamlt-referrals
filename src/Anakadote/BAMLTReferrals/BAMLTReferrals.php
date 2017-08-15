@@ -132,10 +132,15 @@ class BAMLTReferrals
         if ($xml !== false) {
             if ($xml->response->code == 1) {
                 $leads = (array) $xml->response->leads;
-                            
+                
+                if (! isset($leads['lead'])) {
+                    return [];
+                }
+                
                 if (is_array($leads['lead'])) {
                     return $leads['lead'];
                 }
+                
                 return array($leads['lead']);
             }
         }
