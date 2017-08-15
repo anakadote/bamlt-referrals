@@ -57,7 +57,6 @@ class BAMLTReferrals
      */
     public function submit($input, $referrer_token)
     {
-        if(! $uri) return false;
         if(! is_array($input)) return false;
         
         $allowed_inputs = [
