@@ -51,11 +51,12 @@ class BAMLTReferrals
     /**
      * Submit a New Referral
      *
+     * @param  array   $customer_info
      * @param  array   $input
      * @param  string  $referrer_token
      * @return bool
      */
-    public function submit($input, $referrer_token)
+    public function submit($customer_info, $input, $referrer_token)
     {
         if(! is_array($input)) return false;
         
@@ -70,13 +71,18 @@ class BAMLTReferrals
             $input['first_name'] = isset($name[0]) ? $name[0] : '';
             $input['last_name']  = isset($name[1]) ? $name[1] : '';
         }
+        
+        // Include customer info
+        if (isset($customer_info['account_number'])) {
+            $input['comments'] = "\n\nReferral Customer Account Number: " . $customer_info['account_number'] . "\n" . (isset($input['comments']) ? $input['comments'] : '');
+        }
     
         // The XML
         $xml = "<?xml version='1.0'?><root>";
         $xml .= "<source>" . $this->cleanForXML($_SERVER['HTTP_REFERER']) . "</source>";
         $xml .= "<delivery_source>Referral Rewards</delivery_source>";
         $xml .= "<referrer_token>" . $referrer_token . "</referrer_token>";
-        
+                
         // Loop through supplied data and take allowed values
         foreach ($input as $key => $value) {
             if (in_array($key, $allowed_inputs)) {
