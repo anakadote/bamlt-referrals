@@ -15,36 +15,19 @@ Next, update Composer from the Terminal:
 
 ## Usage / Methods
 
-1. getReferrerToken(string $uri, bool $is_client_uri = false)
+getReferrerToken(string $uri, bool $is_client_uri = false)
 
 - **$uri**  - (required) BAM Lead Tracker URI
-- **$is_client_uri**  - true for a Client URI, false for a Store URI   
+- **$is_client_uri**  - true for a Client URI, false for a Store URI
 
+        with(new BAMLTReferrals)->getReferrerToken(BAMLT_URI);
 
-    with(new BAMLTReferrals)->getReferrerToken(BAMLT_URI);
-
-
-2. getReferrals(string $referral_token)
-
+    
+**Other methods:**
 
     with(new BAMLTReferrals)->getReferrals($referral_token);
-
-
-3. getReferralConversions(string $referrer_token)
-
-
     with(new BAMLTReferrals)->getReferralConversions($referral_token);
-
-
-4. getReferralAppointmentConversions(string $referrer_token)
-
-
     with(new BAMLTReferrals)->getReferralAppointmentConversions($referral_token);
-
-
-5. getReferralTransactionConversions(string $referrer_token)
-
-
     with(new BAMLTReferrals)->getReferralTransactionConversions($referral_token);
 
 
