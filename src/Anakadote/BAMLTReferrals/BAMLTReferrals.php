@@ -86,9 +86,7 @@ class BAMLTReferrals
         }
         
         $xml .= "</root>";
-        
-        dd($xml);
-        
+                
         $ch = curl_init("https://bamleadtracker.com/track/");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, ['xml' => $xml]);
