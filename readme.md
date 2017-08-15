@@ -25,6 +25,7 @@ getReferrerToken(string $uri, bool $is_client_uri = false)
     
 **Other methods:**
 
+    with(new BAMLTReferrals)->submit($customer_info, $input, $referrer_token);
     with(new BAMLTReferrals)->getReferrals($referral_token);
     with(new BAMLTReferrals)->getReferralConversions($referral_token);
     with(new BAMLTReferrals)->getReferralAppointmentConversions($referral_token);
