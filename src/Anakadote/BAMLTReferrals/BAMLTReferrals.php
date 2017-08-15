@@ -47,6 +47,63 @@ class BAMLTReferrals
         }
         return false;
     }
+    
+    /**
+     * Submit a New Referral
+     *
+     * @param  array   $input
+     * @param  string  $referrer_token
+     * @return bool
+     */
+    public function submit($input, $referrer_token)
+    {
+        if(! $uri) return false;
+        if(! is_array($input)) return false;
+        
+        $allowed_inputs = [
+            'first_name', 'last_name', 'email', 'phone', 'phone_ext', 'address', 'address_2', 'city', 'state', 'zip', 'interest', 'comments', 
+            'lead_generator', 'delivery_source', 'media_type',
+        ];
+        
+        // Allow a "name" input
+        if (isset($input['name'])) {
+            $name = explode(' ', preg_replace('/\s+/', ' ', (trim($input['name']))));
+            $input['first_name'] = isset($name[0]) ? $name[0] : '';
+            $input['last_name']  = isset($name[1]) ? $name[1] : '';
+        }
+    
+        // The XML
+        $xml = "<?xml version='1.0'?><root>";
+        $xml .= "<source>" . $this->cleanForXML($_SERVER['HTTP_REFERER']) . "</source>";
+        $xml .= "<delivery_source>Referral Rewards</delivery_source>";
+        $xml .= "<referrer_token>" . $referrer_token . "</referrer_token>";
+        
+        // Loop through supplied data and take allowed values
+        foreach ($input as $key => $value) {
+            if (in_array($key, $allowed_inputs)) {
+                $xml .= "<" . $key . ">" . $this->cleanForXML($value) . "</" . $key . ">";
+            }
+        }
+        
+        $xml .= "</root>";
+        
+        dd($xml);
+        
+        $ch = curl_init("https://bamleadtracker.com/track/");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, ['xml' => $xml]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        
+        $xml = simplexml_load_string($output);
+        if ($xml !== false) {
+            if ($xml->response->code == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Get all BAMLT referrals associated with a customer referrer token
@@ -206,5 +263,19 @@ class BAMLTReferrals
             }
         }
         return false;
+    }
+    
+    /**
+     * Clean string for XML
+     * 
+     * @param  string  $string
+     * @return string
+     */
+    private function cleanForXML($string)
+    {
+        $string = strip_tags($string);
+        $string = htmlentities($string, ENT_QUOTES, "UTF-8");
+        $string = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $string);
+        return $string;
     }
 }
