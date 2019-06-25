@@ -20,16 +20,16 @@ getReferrerToken(string $uri, bool $is_client_uri = false)
 - **$uri**  - (required) BAM Lead Tracker URI
 - **$is_client_uri**  - true for a Client URI, false for a Store URI
 
-        with(new BAMLTReferrals)->getReferrerToken(BAMLT_URI);
+        (new BAMLTReferrals)->getReferrerToken(BAMLT_URI);
 
     
 **Other methods:**
 
-    with(new BAMLTReferrals)->submit($customer_info, $input, $referrer_token);
-    with(new BAMLTReferrals)->getReferrals($referral_token);
-    with(new BAMLTReferrals)->getReferralConversions($referral_token);
-    with(new BAMLTReferrals)->getReferralAppointmentConversions($referral_token);
-    with(new BAMLTReferrals)->getReferralTransactionConversions($referral_token);
+    (new BAMLTReferrals)->submit($customer_info, $input, $referrer_token);
+    (new BAMLTReferrals)->getReferrals($referral_token);
+    (new BAMLTReferrals)->getReferralConversions($referral_token);
+    (new BAMLTReferrals)->getReferralAppointmentConversions($referral_token);
+    (new BAMLTReferrals)->getReferralTransactionConversions($referral_token);
 
 
 
