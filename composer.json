@@ -1,14 +1,14 @@
 {
     "name": "anakadote/bamlt-referrals",
-    "description": "Interface with the BAM Lead Tracker Customer Referrer web service.",
+    "description": "Interface with the BAM LeadTracker Customer Referrer web service.",
     "authors": [
         {
             "name": "Taylor Collins",
-            "email": "taylor@tcdihq.com"
+            "email": "hello@endif.io"
         }
     ],
     "keywords": [
-	    "laravel"
+        "laravel"
     ],
     "require": {
         "php": ">=5.4.0"

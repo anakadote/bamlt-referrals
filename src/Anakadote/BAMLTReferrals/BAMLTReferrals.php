@@ -6,10 +6,10 @@ use DateTime;
 use DateInterval;
 
 /**
- * Interface with the BAM Lead Tracker Customer Referrer web service.
+ * Interface with the BAM LeadTracker Customer Referrer web service.
  *
- * @version  1.0.0
- * @author   Taylor Collins <taylor@tcdihq.com>
+ * @version  1.1.0
+ * @author   Taylor Collins <hello@endif.io>
  */
 class BAMLTReferrals
 {
@@ -24,7 +24,7 @@ class BAMLTReferrals
     {
         $xml = "<?xml version='1.0'?><root>";
         
-        if($is_client_uri){
+        if ($is_client_uri){
             $xml .= "<uri_client>" . $uri . "</uri_client>";
         } else {
             $xml .= "<uri>" . $uri . "</uri>";
@@ -58,7 +58,7 @@ class BAMLTReferrals
      */
     public function submit($customer_info, $input, $referrer_token)
     {
-        if(! is_array($input)) return false;
+        if (! is_array($input)) return false;
         
         $allowed_inputs = [
             'first_name', 'last_name', 'email', 'phone', 'phone_ext', 'address', 'address_2', 'city', 'state', 'zip', 'interest', 'comments', 
@@ -80,7 +80,7 @@ class BAMLTReferrals
         // The XML
         $xml = "<?xml version='1.0'?><root>";
         $xml .= "<source>" . $this->cleanForXML($_SERVER['HTTP_REFERER']) . "</source>";
-        $xml .= "<delivery_source>Referral Rewards</delivery_source>";
+        $xml .= "<delivery_source>Referral Tracker</delivery_source>";
         $xml .= "<referrer_token>" . $referrer_token . "</referrer_token>";
                 
         // Loop through supplied data and take allowed values

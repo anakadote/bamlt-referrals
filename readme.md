@@ -37,7 +37,7 @@ getReferrerToken(string $uri, bool $is_client_uri = false)
 
 To use with Laravel, add the service provider. Open `config/app.php` and add a new item to the providers array.
 
-    Anakadote\BAMLTReferrals\BAMLTReferralsProvider::class
+    Anakadote\BAMLTReferrals\BAMLTReferralsServiceProvider::class
 
 This package is also accessible via a Laravel Facade so to use simply call its methods on the Facade "BAMLTReferrals":  
 

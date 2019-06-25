@@ -4,7 +4,7 @@ namespace Anakadote\BAMLTReferrals;
 
 use Illuminate\Support\ServiceProvider;
 
-class BAMLTReferralsProvider extends ServiceProvider {
+class BAMLTReferralsServiceProvider extends ServiceProvider {
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -30,14 +30,13 @@ class BAMLTReferralsProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app['bamlt-referrals'] = $this->app->share(function($app)
-        {
+        $this->app->singleton(Anakadote\BAMLTReferrals\Facades\BAMLTReferrals::class, function($app) {
             return new BAMLTReferrals;
         });
         
-        // Register Facade
-        $this->app->booting(function()
-        {
+        $this->app['bamlt-referrals'] = $this->app->make(Anakadote\BAMLTReferrals\Facades\BAMLTReferrals::class);
+        
+        $this->app->booting(function() {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
             $loader->alias('BAMLTReferrals', 'Anakadote\BAMLTReferrals\Facades\BAMLTReferrals');
         });
@@ -50,7 +49,7 @@ class BAMLTReferralsProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return array();
+        return [];
     }
 
 }
