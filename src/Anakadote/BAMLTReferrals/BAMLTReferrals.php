@@ -102,7 +102,7 @@ class BAMLTReferrals
         $xml = simplexml_load_string($output);
         if ($xml !== false) {
             if ($xml->response->code == 1) {
-                return true;
+                return $xml->response->token;
             }
         }
         return false;
