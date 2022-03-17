@@ -77,10 +77,10 @@ class BAMLTReferrals
         
         // Include customer info
         if (! empty($customer_info['first_name']) && ! empty($customer_info['last_name'])) {
-            $input['comments'] .= "\n\nReferral Customer: " . ($customer_info['first_name'] . ' ' . $customer_info['last_name']) . (! empty($input['comments']) ? "\n" . $input['comments'] : ''));
+            $input['comments'] .= "\n\nReferral Customer: " . ($customer_info['first_name'] . ' ' . $customer_info['last_name']) . (! empty($input['comments']) ? "\n" . $input['comments'] : '');
         }
         if (! empty($customer_info['account_number'])) {
-            $input['comments'] .= "\n\nReferral Customer Account Number: " . $customer_info['account_number'] . (! empty($input['comments']) ? "\n" . $input['comments'] : ''));
+            $input['comments'] .= "\n\nReferral Customer Account Number: " . $customer_info['account_number'] . (! empty($input['comments']) ? "\n" . $input['comments'] : '');
         }
     
         // The XML
