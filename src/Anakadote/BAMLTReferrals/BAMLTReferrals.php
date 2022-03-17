@@ -8,7 +8,7 @@ use DateInterval;
 /**
  * Interface with the BAM LeadTracker Customer Referrer web service.
  *
- * @version  1.1.0
+ * @version  1.1.1
  * @author   Taylor Collins <hello@endif.io>
  */
 class BAMLTReferrals
@@ -71,10 +71,16 @@ class BAMLTReferrals
             $input['first_name'] = isset($name[0]) ? $name[0] : '';
             $input['last_name']  = isset($name[1]) ? $name[1] : '';
         }
+
+        // Comments
+        $input['comments'] = isset($input['comments']) ? $input['comments'] : '';
         
         // Include customer info
-        if (isset($customer_info['account_number'])) {
-            $input['comments'] = "\n\nReferral Customer Account Number: " . $customer_info['account_number'] . "\n" . (isset($input['comments']) ? $input['comments'] : '');
+        if (! empty($customer_info['first_name']) && ! empty($customer_info['last_name'])) {
+            $input['comments'] .= "\n\nReferral Customer: " . ($customer_info['first_name'] . ' ' . $customer_info['last_name']) . (! empty($input['comments']) ? "\n" . $input['comments'] : ''));
+        }
+        if (! empty($customer_info['account_number'])) {
+            $input['comments'] .= "\n\nReferral Customer Account Number: " . $customer_info['account_number'] . (! empty($input['comments']) ? "\n" . $input['comments'] : ''));
         }
     
         // The XML

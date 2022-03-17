@@ -20,7 +20,7 @@ class BAMLTReferralsServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        
+        //...
     }
 
     /**
@@ -51,5 +51,4 @@ class BAMLTReferralsServiceProvider extends ServiceProvider {
     {
         return [];
     }
-
 }
