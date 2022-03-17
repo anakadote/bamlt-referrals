@@ -76,6 +76,9 @@ class BAMLTReferrals
         $input['comments'] = isset($input['comments']) ? $input['comments'] : '';
         
         // Include customer info
+        if (! empty($customer_info['name'])) {
+            $input['comments'] .= "\n\nReferral Customer: " . ($customer_info['name']) . (! empty($input['comments']) ? "\n" . $input['comments'] : '');
+        }
         if (! empty($customer_info['first_name']) && ! empty($customer_info['last_name'])) {
             $input['comments'] .= "\n\nReferral Customer: " . ($customer_info['first_name'] . ' ' . $customer_info['last_name']) . (! empty($input['comments']) ? "\n" . $input['comments'] : '');
         }
